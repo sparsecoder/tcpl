@@ -1,6 +1,10 @@
 apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'eclipse'
+//apply plugin: 'pmd'
+//apply plugin: 'findbugs'
+//apply plugin: 'codenarc'
+//apply plugin: 'jdepend'
 
 sourceCompatibility = 1.5
 version = '1.0'
