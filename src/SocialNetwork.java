@@ -13,6 +13,8 @@ import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.DirectedGraph;
 import edu.uci.ics.jung.graph.DirectedSparseGraph;
 import edu.uci.ics.jung.visualization.BasicVisualizationServer;
+import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
+import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
 
 public class SocialNetwork {
     private Set<Connection> connections;
@@ -54,8 +56,12 @@ public class SocialNetwork {
         BasicVisualizationServer<String, Connection> server =
             new BasicVisualizationServer<String, Connection>(layout);
         server.setPreferredSize(new Dimension(350,350));
+        server.getRenderContext().setVertexLabelTransformer(
+            new ToStringLabeller<String>());
+        server.getRenderer().getVertexLabelRenderer().setPosition(
+            Position.CNTR);
 
-        JFrame frame = new JFrame("Simple Graph View");
+        JFrame frame = new JFrame("Social Network");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(server);
         frame.pack();
