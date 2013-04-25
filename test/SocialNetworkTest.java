@@ -1,26 +1,29 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 public class SocialNetworkTest {
     private final static String PERSON1 = "Kernighan";
     private final static String PERSON2 = "Ritchie";
+    private final static String PERSON3 = "Stallman";
 
     @Test
-    public void testAddConnection() {
+    public void testSizeGettersEmpty() {
+        SocialNetwork network = new SocialNetwork();
+        assertEquals(0, network.getNumNodes());
+        assertEquals(0, network.getNumConnections());
+    }
+
+    @Test
+    public void testSizeGetters() {
         SocialNetwork network = new SocialNetwork();
 
-        Connection connection = mock(Connection.class);
-        when(connection.getFrom()).thenReturn(PERSON1);
-        when(connection.getTo()).thenReturn(PERSON2);
-        when(connection.toString()).thenReturn(PERSON1 + "->" + PERSON2);
+        Connection connection1 = new Connection(PERSON1, PERSON2);
+        network.add(connection1);
 
-        network.add(connection);
+        Connection connection2 = new Connection(PERSON3, PERSON2);
+        network.add(connection2);
 
-        System.out.println(network);
-
-        fail("finish me");
+        assertEquals(2, network.getNumNodes());
+        assertEquals(3, network.getNumConnections());
     }
 }
