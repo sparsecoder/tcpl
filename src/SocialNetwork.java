@@ -40,11 +40,11 @@ public class SocialNetwork {
 
         Layout<String, Connection> layout =
             new CircleLayout<String, Connection>(graph);
-        layout.setSize(new Dimension(300,300));
+        layout.setSize(new Dimension(700,525));
 
         BasicVisualizationServer<String, Connection> server =
             new BasicVisualizationServer<String, Connection>(layout);
-        server.setPreferredSize(new Dimension(350,350));
+        server.setPreferredSize(new Dimension(800,600));
         server.getRenderContext().setVertexLabelTransformer(
             new ToStringLabeller<String>());
         server.getRenderer().getVertexLabelRenderer().setPosition(
