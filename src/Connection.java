@@ -13,6 +13,19 @@ public class Connection {
 
     @Override
     public String toString() {
-        return from + " -> " + to;
+        return getFrom() + " -> " + getTo();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (! (obj instanceof Connection)) return false;
+        Connection other = (Connection) obj;
+        return getFrom().equals(other.getFrom())
+            && getTo().equals(other.getTo());
+    }
+
+    @Override
+    public int hashCode() {
+        return getFrom().hashCode() + getTo().hashCode();
     }
 }
