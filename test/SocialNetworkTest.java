@@ -23,7 +23,7 @@ public class SocialNetworkTest {
         Connection connection2 = new Connection(PERSON3, PERSON2);
         network.add(connection2);
 
-        assertEquals(2, network.getNumNodes());
-        assertEquals(3, network.getNumConnections());
+        assertEquals(3, network.getNumNodes());
+        assertEquals(2, network.getNumConnections());
     }
 }
