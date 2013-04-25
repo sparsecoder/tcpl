@@ -41,6 +41,9 @@ public class SocialNetwork {
         nodes.add(connection.getTo());
     }
 
+    public int getNumNodes() { return nodes.size(); }
+    public int getNumConnections() { return connections.size(); }
+
     public void visualize() {
         DirectedGraph<String, Connection> graph = makeGraph();
 
