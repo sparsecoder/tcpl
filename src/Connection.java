@@ -1,14 +1,17 @@
 public class Connection {
+    private String f, t;
+
     public Connection(String from, String to) {
-        throw new UnsupportedOperationException("finish me!");
+        f = from;
+        t = to;
     }
 
     public String getFrom() {
-        throw new UnsupportedOperationException("finish me!");
+        return f;
     }
 
     public String getTo() {
-        throw new UnsupportedOperationException("finish me too!");
+        return t;
     }
 
     @Override
