@@ -69,7 +69,7 @@ public class SocialNetwork {
         server.getRenderContext().setVertexShapeTransformer(
             new Transformer<String,Shape>() {
                 public Shape transform(String s){
-                    return new Ellipse2D.Double(-50, -25, 100, 50);
+                    return new Ellipse2D.Double(-50, -15, 100, 30);
                 }
             });
         server.getRenderContext().setVertexFillPaintTransformer(
