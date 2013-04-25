@@ -1,8 +1,12 @@
 import java.awt.Dimension;
+import java.awt.Shape;
+import java.awt.geom.Ellipse2D;
 import java.util.Set;
 import java.util.HashSet;
 
 import javax.swing.JFrame;
+
+import org.apache.commons.collections15.Transformer;
 
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
@@ -18,7 +22,7 @@ public class SocialNetwork {
 
     public static void main(String[] args) {
         SocialNetwork network = new SocialNetwork();
-
+        
         throw new UnsupportedOperationException("Finish me!");
 
         network.visualize();
@@ -49,6 +53,12 @@ public class SocialNetwork {
             new ToStringLabeller<String>());
         server.getRenderer().getVertexLabelRenderer().setPosition(
             Position.CNTR);
+        server.getRenderContext().setVertexShapeTransformer(
+            new Transformer<String,Shape>() {
+                public Shape transform(String s){
+                    return new Ellipse2D.Double(-15, -15, 30, 30);
+                }
+            });
 
         JFrame frame = new JFrame("Social Network");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
