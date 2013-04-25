@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="dist" name="tcpl">
+    <property environment="env"/>
+	<property file="build.${user.name}.properties" />
+    <property file="build.properties"/>
+
+    <path id="build.classpath">
+        <pathelement location="bin"/>
+    	<fileset dir="lib">
+    	    <include name="**/*.jar"/>
+        </fileset>
+    </path>
+    <path id="test.classpath">
+        <pathelement location="testClasses"/>
+        <path refid="build.classpath"/>
+		<fileset dir="test/lib">
+			<include name="*.jar" />
+		</fileset>
+    </path>
+
+    <target depends="clean" name="cleanall"/>
+    <target name="clean" depends="cleantests">
+        <delete dir="bin"/>
+        <delete dir="dist"/>
+    </target>
+	<target name="cleantests" description="Clean test output directories">
+		<delete dir="testClasses"/>
+		<delete dir="testOutput"/>
+    </target>
+
+    <target name="build">
+        <mkdir dir="bin"/>
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="build.classpath"/>
+        </javac>
+    </target>
+    <target depends="build" name="dist">
+        <mkdir dir="dist"/>
+        <jar destfile="dist/${ant.project.name}.jar" basedir="bin"/>
+        <copy todir="dist">
+            <fileset dir="lib">
+                <include name="**/*.jar"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="buildtests" depends="build">
+        <mkdir dir="testClasses"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="testClasses" includeantruntime="false" source="${source}" target="${target}">
+            <src path="test"/>
+            <classpath refid="test.classpath"/>
+        </javac>
+    </target>
+
+    <target name="test" depends="build, buildtests" description="Run tests">
+        <mkdir dir="testOutput/xml"/>
+        <junit fork="yes" printsummary="withOutAndErr" forkmode="perTest" maxmemory="256m" haltonfailure="false" failureproperty="tests.failed" showoutput="true">
+			<classpath refid="test.classpath" />
+			<formatter type="brief" usefile="false" />
+			<formatter type="xml" usefile="true" />
+			<batchtest todir="testOutput/xml">
+				<fileset dir="testClasses">
+					<include name="**/*Test.class" />
+				</fileset>
+                <formatter type="xml"/>
+			</batchtest>
+        </junit>
+
+        <condition property="tests.failed.str"
+                value="Tests failed!   "
+                 else="Tests succeeded!">
+            <isset property="tests.failed" />
+        </condition>
+
+		<echo>
+            ************************
+            *  ${tests.failed.str}    *
+            ************************
+        </echo>
+    </target>
+    <target name="junitreport" depends="test">
+        <mkdir dir="testOutput/html"/>
+		<junitreport todir="testOutput/html">
+			<fileset dir="testOutput/xml" />
+			<report todir="testOutput/html" />
+		</junitreport>
+    </target>
+</project>
