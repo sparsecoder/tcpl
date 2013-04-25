@@ -13,7 +13,7 @@ public class Connection {
 
     @Override
     public String toString() {
-        return getFrom() + " -> " + getTo();
+        return getFrom() + "->" + getTo();
     }
 
     @Override
