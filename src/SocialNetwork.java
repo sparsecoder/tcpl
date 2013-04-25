@@ -25,7 +25,7 @@ public class SocialNetwork {
     public static void main(String[] args) {
         SocialNetwork network = new SocialNetwork();
         
-        throw new UnsupportedOperationException("Finish me!");
+        // finish me!
 
         network.visualize();
     }
