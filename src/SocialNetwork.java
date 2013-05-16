@@ -20,7 +20,6 @@ import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.UndirectedGraph;
 import edu.uci.ics.jung.graph.UndirectedSparseGraph;
 import edu.uci.ics.jung.visualization.BasicVisualizationServer;
-import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
 
 public class SocialNetwork {
@@ -67,7 +66,7 @@ public class SocialNetwork {
             new BasicVisualizationServer<String, Connection>(layout);
         server.setPreferredSize(new Dimension(1024,768));
         server.getRenderContext().setVertexLabelTransformer(
-            new ToStringLabeller<String>());
+            new UnicodeVertexStringer<String>());
         server.getRenderer().getVertexLabelRenderer().setPosition(
             Position.CNTR);
         server.getRenderContext().setVertexShapeTransformer(
