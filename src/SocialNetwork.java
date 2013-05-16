@@ -11,10 +11,11 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JFrame;
+import java.awt.Font;
 
 import org.apache.commons.collections15.Transformer;
 
-import edu.uci.ics.jung.algorithms.layout.CircleLayout;
+import edu.uci.ics.jung.algorithms.layout.ISOMLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.UndirectedGraph;
 import edu.uci.ics.jung.graph.UndirectedSparseGraph;
@@ -59,24 +60,34 @@ public class SocialNetwork {
         UndirectedGraph<String, Connection> graph = makeGraph();
 
         Layout<String, Connection> layout =
-            new CircleLayout<String, Connection>(graph);
-        layout.setSize(new Dimension(800,600));
+            new ISOMLayout<String, Connection>(graph);
+        layout.setSize(new Dimension(1000,700));
 
         BasicVisualizationServer<String, Connection> server =
             new BasicVisualizationServer<String, Connection>(layout);
-        server.setPreferredSize(new Dimension(800,600));
+        server.setPreferredSize(new Dimension(1024,768));
         server.getRenderContext().setVertexLabelTransformer(
             new ToStringLabeller<String>());
         server.getRenderer().getVertexLabelRenderer().setPosition(
             Position.CNTR);
         server.getRenderContext().setVertexShapeTransformer(
             new Transformer<String,Shape>() {
+                @Override
                 public Shape transform(String s){
-                    return new Ellipse2D.Double(-50, -15, 100, 30);
+                    return new Ellipse2D.Double(-40, -10, 80, 20);
+                }
+            });
+        server.getRenderContext().setVertexFontTransformer(
+            new Transformer<String, Font>(){
+                @Override
+                public Font transform(String arg0) {
+                    Font font = new Font("Arial Unicode MS", Font.PLAIN, 11);
+                    return font;
                 }
             });
         server.getRenderContext().setVertexFillPaintTransformer(
             new Transformer<String,Paint>() {
+                @Override
                 public Paint transform(String s) {
                     return Color.GREEN;
                 }
