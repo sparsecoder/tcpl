@@ -16,8 +16,8 @@ import org.apache.commons.collections15.Transformer;
 
 import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
-import edu.uci.ics.jung.graph.DirectedGraph;
-import edu.uci.ics.jung.graph.DirectedSparseGraph;
+import edu.uci.ics.jung.graph.UndirectedGraph;
+import edu.uci.ics.jung.graph.UndirectedSparseGraph;
 import edu.uci.ics.jung.visualization.BasicVisualizationServer;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
@@ -56,7 +56,7 @@ public class SocialNetwork {
     public int getNumConnections() { return connections.size(); }
 
     public void visualize() {
-        DirectedGraph<String, Connection> graph = makeGraph();
+        UndirectedGraph<String, Connection> graph = makeGraph();
 
         Layout<String, Connection> layout =
             new CircleLayout<String, Connection>(graph);
@@ -94,9 +94,9 @@ public class SocialNetwork {
         return makeGraph().toString();
     }
 
-    private DirectedGraph<String, Connection> makeGraph() {
-        DirectedGraph<String, Connection> graph = 
-            new DirectedSparseGraph<String, Connection>();
+    private UndirectedGraph<String, Connection> makeGraph() {
+        UndirectedGraph<String, Connection> graph = 
+            new UndirectedSparseGraph<String, Connection>();
         for (String node : nodes) {
             graph.addVertex(node);
         }
