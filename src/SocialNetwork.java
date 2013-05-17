@@ -71,22 +71,22 @@ public class SocialNetwork {
         server.setPreferredSize(new Dimension(1024,768));
         server.getRenderContext().setVertexLabelTransformer(
             new ToStringLabeller<String>());
-        server.getRenderer().getVertexLabelRenderer().setPosition(
-            Position.CNTR);
-        server.getRenderContext().setVertexShapeTransformer(
-            new Transformer<String,Shape>() {
-                @Override
-                public Shape transform(String s){
-                    return new Ellipse2D.Double(-40, -10, 80, 20);
-                }
-            });
-        server.getRenderContext().setVertexFillPaintTransformer(
-            new Transformer<String,Paint>() {
-                @Override
-                public Paint transform(String s) {
-                    return Color.GREEN;
-                }
-            });
+        //server.getRenderer().getVertexLabelRenderer().setPosition(
+        //    Position.CNTR);
+        //server.getRenderContext().setVertexShapeTransformer(
+        //    new Transformer<String,Shape>() {
+        //        @Override
+        //        public Shape transform(String s){
+        //            return new Ellipse2D.Double(-40, -10, 80, 20);
+        //        }
+        //    });
+        //server.getRenderContext().setVertexFillPaintTransformer(
+        //    new Transformer<String,Paint>() {
+        //        @Override
+        //        public Paint transform(String s) {
+        //            return Color.GREEN;
+        //        }
+        //    });
 
         JFrame frame = new JFrame("Social Network");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
