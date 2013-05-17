@@ -5,9 +5,10 @@ import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 import java.util.Set;
 import java.util.HashSet;
-import java.util.Scanner;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.BufferedReader;
 import java.io.IOException;
 
 import javax.swing.JFrame;
@@ -15,7 +16,7 @@ import java.awt.Font;
 
 import org.apache.commons.collections15.Transformer;
 
-import edu.uci.ics.jung.algorithms.layout.ISOMLayout;
+import edu.uci.ics.jung.algorithms.layout.FRLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.UndirectedGraph;
 import edu.uci.ics.jung.graph.UndirectedSparseGraph;
@@ -30,12 +31,13 @@ public class SocialNetwork {
     public static void main(String[] args) throws IOException {
         SocialNetwork network = new SocialNetwork();
 
-        Scanner scanner = new Scanner(new File(args[0]));
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            Scanner lineScanner = new Scanner(line);
-            String from = lineScanner.next();
-            String to = lineScanner.next();
+        File file = new File(args[0]);
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String pieces[] = line.split("\\s+");
+            String from = pieces[0];
+            String to = pieces[1];
             network.add(new Connection(from, to));
         }
 
@@ -60,7 +62,7 @@ public class SocialNetwork {
         UndirectedGraph<String, Connection> graph = makeGraph();
 
         Layout<String, Connection> layout =
-            new ISOMLayout<String, Connection>(graph);
+            new FRLayout<String, Connection>(graph);
         layout.setSize(new Dimension(1000,700));
 
         BasicVisualizationServer<String, Connection> server =
