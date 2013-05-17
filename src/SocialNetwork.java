@@ -13,7 +13,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 import javax.swing.JFrame;
-import java.awt.Font;
 
 import org.apache.commons.collections15.Transformer;
 
@@ -65,7 +64,7 @@ public class SocialNetwork {
 
         Layout<String, Connection> layout =
             new FRLayout<String, Connection>(graph);
-        layout.setSize(new Dimension(1000,700));
+        layout.setSize(new Dimension(950,700));
 
         BasicVisualizationServer<String, Connection> server =
             new BasicVisualizationServer<String, Connection>(layout);
@@ -79,14 +78,6 @@ public class SocialNetwork {
                 @Override
                 public Shape transform(String s){
                     return new Ellipse2D.Double(-40, -10, 80, 20);
-                }
-            });
-        server.getRenderContext().setVertexFontTransformer(
-            new Transformer<String, Font>(){
-                @Override
-                public Font transform(String arg0) {
-                    Font font = new Font("Arial Unicode MS", Font.PLAIN, 11);
-                    return font;
                 }
             });
         server.getRenderContext().setVertexFillPaintTransformer(
