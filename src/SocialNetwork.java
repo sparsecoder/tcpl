@@ -6,8 +6,9 @@ import java.awt.geom.Ellipse2D;
 import java.util.Set;
 import java.util.HashSet;
 
+import java.io.InputStreamReader;
+import java.io.FileInputStream;
 import java.io.File;
-import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -32,7 +33,8 @@ public class SocialNetwork {
         SocialNetwork network = new SocialNetwork();
 
         File file = new File(args[0]);
-        BufferedReader reader = new BufferedReader(new FileReader(file));
+        BufferedReader reader = new BufferedReader(
+            new InputStreamReader(new FileInputStream(file), "UTF-8"));
         String line;
         while ((line = reader.readLine()) != null) {
             String pieces[] = line.split("\\s+");
